@@ -1,0 +1,100 @@
+{
+  "theme": "Light",
+  "archetype": "Archetype 4 (Swiss & High-Contrast) + Organic Accents",
+  "colors": {
+    "primary": "#0F3057",
+    "primary_light": "#1E4B82",
+    "accent": "#FF6B00",
+    "accent_light": "#FF8C33",
+    "background": "#F8F9FA",
+    "surface": "#FFFFFF",
+    "text_primary": "#0A0A0A",
+    "text_secondary": "#4B5563",
+    "border": "#E5E7EB",
+    "success": "#10B981",
+    "error": "#EF4444"
+  },
+  "typography": {
+    "font_family": {
+      "headings": "Clash Display",
+      "body": "Inter"
+    },
+    "scale": {
+      "h1": "text-4xl font-bold tracking-tight",
+      "h2": "text-2xl font-semibold tracking-tight",
+      "h3": "text-xl font-medium",
+      "body": "text-base leading-relaxed",
+      "small": "text-sm text-gray-500 uppercase tracking-widest"
+    }
+  },
+  "spacing_and_layout": {
+    "container_padding": "p-4 md:p-6",
+    "gap": "gap-4",
+    "border_radius": "rounded-xl",
+    "shadows": {
+      "card": "shadow-[0_4px_20px_rgba(0,0,0,0.05)]",
+      "button": "shadow-[0_2px_10px_rgba(255,107,0,0.2)]"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-[#FF6B00] text-white rounded-xl py-4 px-6 font-bold text-center",
+      "secondary": "bg-[#0F3057] text-white rounded-xl py-4 px-6 font-bold text-center",
+      "outline": "border-2 border-[#E5E7EB] text-[#0F3057] rounded-xl py-4 px-6 font-bold text-center"
+    },
+    "cards": {
+      "listing": "bg-white rounded-xl p-4 border border-[#E5E7EB] shadow-sm flex flex-col gap-3"
+    },
+    "inputs": {
+      "text": "w-full border border-[#E5E7EB] rounded-xl px-4 py-3 bg-[#F8F9FA] focus:border-[#0F3057] focus:ring-1 focus:ring-[#0F3057]"
+    },
+    "animations": {
+      "radar_pulse": "Use React Native Reanimated to create concentric scaling circles starting from center, opacity fading out. Colors: #FF6B00 with 20% opacity."
+    }
+  },
+  "screens": {
+    "home": {
+      "layout": "Header with Map Background, Tab selector (Find Trip / Find Parcel), List of recent cards.",
+      "visuals": "Subtle map background overlay in the header. Radar pulse animation when searching."
+    },
+    "listing_detail": {
+      "layout": "Large hero image, Sender/Traveler Profile summary (Trust indicators), Route details, 'Make an Offer' sticky bottom CTA."
+    },
+    "validation_flow": {
+      "layout": "Large numeric input/display. Sender shows code. Traveler enters code. High contrast, large text for outdoor visibility."
+    }
+  },
+  "image_urls": [
+    {
+      "url": "https://images.unsplash.com/photo-1541544181051-e46607bc22a4?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwxfHxjYXJkYm9hcmQlMjBwYXJjZWwlMjBoYW5kfGVufDB8fHx8MTc3NzU4MzU4MHww&ixlib=rb-4.1.0&q=85",
+      "description": "Person holding Fragile box",
+      "category": "parcel_hero"
+    },
+    {
+      "url": "https://images.pexels.com/photos/30981181/pexels-photo-30981181.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Person walking with luggage on blue carpeted airport corridor, traveling",
+      "category": "traveler_hero"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1722710852659-f5d36871a083?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDR8MHwxfHNlYXJjaHwxfHxibHVlJTIwb3JhbmdlJTIwYWJzdHJhY3QlMjBjaXJjbGVzfGVufDB8fHx8MTc3NzU4MzU4Nnww&ixlib=rb-4.1.0&q=85",
+      "description": "Blurry lights representing radar/pulse abstract background",
+      "category": "abstract_background"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1757820470004-fe7d9f6d57a9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMG1hcCUyMHBhdHRlcm58ZW58MHx8fHwxNzc3NTgzNTgwfDA&ixlib=rb-4.1.0&q=85",
+      "description": "Abstract dark textured map lines for subtle overlay",
+      "category": "map_pattern_overlay"
+    }
+  ],
+  "instructions_to_main_agent": [
+    "Build as a React Native Expo app.",
+    "Ensure all touch targets are at least 48x48px for mobile usability.",
+    "Implement bottom tab navigation (Home, Trips, Messages, Profile).",
+    "Use high contrast colors for the Validation Code flow to ensure outdoor legibility.",
+    "Implement the 'Radar Pulse' animation using React Native Reanimated or similar.",
+    "Avoid generic placeholders; use the provided image URLs.",
+    "Use testID attributes on all interactive elements for testing.",
+    "Style headings with Clash Display (if custom fonts can be loaded) or a bold System font if not, and body with Inter.",
+    "Keep border-radius strictly at 12px (rounded-xl) for all cards and buttons to match the Modern Afro-Tech theme."
+  ]
+}
