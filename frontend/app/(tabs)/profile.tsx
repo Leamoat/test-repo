@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert,
   ActivityIndicator, RefreshControl,
@@ -17,16 +17,31 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
-  const load = useCallback(async () => {
-    if (!user) return;
+  // Keep latest functions & ids in refs so our callbacks stay referentially stable
+  // (prevents context re-renders from re-firing effects in a loop)
+  const refreshRef = useRef(refresh);
+  const userIdRef = useRef(user?.id);
+  useEffect(() => { refreshRef.current = refresh; userIdRef.current = user?.id; });
+
+  const load = useCallback(async (withRefresh: boolean) => {
+    const uid = userIdRef.current;
+    if (!uid) { setLoading(false); return; }
     try {
-      await refresh();
-      const r = await api.get("/listings", { params: { user_id: user.id, status: "" } });
+      if (withRefresh) await refreshRef.current?.();
+      const r = await api.get("/listings", { params: { user_id: uid, status: "" } });
       setMyListings(r.data);
     } catch {} finally { setLoading(false); setRefreshing(false); }
-  }, [user, refresh]);
+  }, []);
 
-  useFocusEffect(useCallback(() => { setLoading(true); load(); }, [load]));
+  // Refresh listings every time the Profile tab becomes focused.
+  // Callback has empty deps → reference is stable → no re-fire loop from context updates.
+  useFocusEffect(
+    useCallback(() => {
+      load(true);
+    }, [load])
+  );
+
+  const onRefresh = () => { setRefreshing(true); load(true); };
 
   const logout = () => {
     Alert.alert("Sign out", "Are you sure you want to sign out?", [
@@ -41,7 +56,7 @@ export default function Profile() {
     <SafeAreaView style={styles.root} edges={["top"]} testID="profile-screen">
       <ScrollView
         contentContainerStyle={{ paddingBottom: 32 }}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => { setRefreshing(true); load(); }} tintColor={C.accent} />}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={C.accent} />}
       >
         <View style={styles.header}>
           <View style={styles.avatar}><Text style={styles.avatarTxt}>{user.full_name[0]}</Text></View>
