@@ -132,20 +132,22 @@ export default function ListingDetail() {
 
       <Modal visible={showOffer} transparent animationType="slide" onRequestClose={() => setShowOffer(false)}>
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={styles.modalRoot}>
-          <TouchableOpacity style={styles.backdrop} onPress={() => setShowOffer(false)} />
+          <TouchableOpacity style={styles.backdrop} onPress={() => setShowOffer(false)} activeOpacity={1} />
           <View style={styles.sheet}>
             <View style={styles.sheetHandle} />
             <Text style={styles.sheetTitle}>Make an offer</Text>
-            <Text style={styles.label}>Your price (€)</Text>
-            <TextInput testID="offer-price-input" style={styles.input} value={offerPrice} onChangeText={setOfferPrice} keyboardType="decimal-pad" />
-            <Text style={styles.label}>Message (optional)</Text>
-            <TextInput
-              testID="offer-message-input"
-              style={[styles.input, { height: 80, textAlignVertical: "top" }]}
-              multiline value={offerMsg} onChangeText={setOfferMsg}
-              placeholder="Hi! I'd like to send my parcel with you."
-              placeholderTextColor="#9CA3AF"
-            />
+            <ScrollView keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
+              <Text style={styles.label}>Your price (€)</Text>
+              <TextInput testID="offer-price-input" style={styles.input} value={offerPrice} onChangeText={setOfferPrice} keyboardType="decimal-pad" />
+              <Text style={styles.label}>Message (optional)</Text>
+              <TextInput
+                testID="offer-message-input"
+                style={[styles.input, { height: 80, textAlignVertical: "top" }]}
+                multiline value={offerMsg} onChangeText={setOfferMsg}
+                placeholder="Hi! I'd like to send my parcel with you."
+                placeholderTextColor="#9CA3AF"
+              />
+            </ScrollView>
             <TouchableOpacity testID="submit-offer-btn" style={[styles.cta, { marginTop: 16 }]} onPress={submit} disabled={submitting}>
               {submitting ? <ActivityIndicator color="#fff" /> : <><Ionicons name="paper-plane" size={18} color="#fff" /><Text style={styles.ctaTxt}>Send offer</Text></>}
             </TouchableOpacity>
